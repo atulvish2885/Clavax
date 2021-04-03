@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block content %}
+
+<html>
+   <head>
+      <style>
+         table, th, td {
+           border: 1px solid black;
+           
+         }
+         
+         .btn {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  float:left;  
+}
+.btn1 {
+  border: 2px solid green;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  float:right;
+  top: 20px;
+}
+         </style>
+   </head>
+   <button class="btn">Enrollment app</button>
+   <a href="{% url 'home' %}">Profile</a>
+   <button class="btn1">New Student</button>
+   
+   <body>
+     <center> <h1>Student Profile</h1></center>
+      <table class="tab" style="width:100%" ></table>
+     
+         
+          <tr>
+          
+          <th>Student Name</th>
+          
+          <th>Father name</th> 
+          
+          <th>DOB</th>
+        
+         <th>Address</th>
+         
+          <th>City</th>
+          
+          <th>State</th>
+          
+          <th>Pin Code</th>
+          
+          <th>Phone</th>
+          
+          <th>Email</th>
+          
+          <th>Class Opted</th>
+          
+          <th>Marks</th>
+          
+          <th>Date_enrolled</th>
+          
+
+         </tr>
+         <tr>
+            {% for student in Student %}
+
+            <a href={{ student.student_id }}> <td>{{ student.student_name }}</td></a>
+            <td>{{ student.father_name }}</td>
+            <td> {{ student.date_of_birth }}</td>
+            <td>{{ student.address }}</td>
+            <td>{{ student.city }}</td>
+            <td>{{ student.state }}</td>
+            <td>{{ student.pin_code }}</td>
+            <td>{{ student.phone }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.class_opted }}</td>
+            <td>{{ student.marks }}</td>
+            <td>{{ student.date_enrolled }}</td>
+            {% endfor %}
+         </tr>
+      </table>
+      {% if is_paginated %}
+  <nav aria-label="Page navigation conatiner"></nav>
+  <ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+    <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+    {% endif %}
+    {% if page_obj.has_next %}
+    <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+
+    {% endif %}
+  </ul>
+  </nav>
+</div>
+{% endif %}
+
+          
+      
+   </body>
+   
+</html>
+{% endblock content %}
